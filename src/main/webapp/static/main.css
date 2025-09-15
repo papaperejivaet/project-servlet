@@ -1,0 +1,68 @@
+/* Общие стили */
+body {
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(135deg, #ece9e6, #ffffff);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Заголовок */
+h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Таблица */
+table {
+    border-collapse: collapse;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+/* Ячейки */
+td {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #fafafa;
+    transition: all 0.25s ease-in-out;
+    border: 2px solid #ddd;
+}
+
+/* Наведение */
+td:hover {
+    background-color: #e6f7ff;
+    transform: scale(1.05);
+    box-shadow: inset 0 0 10px rgba(0, 170, 255, 0.3);
+}
+
+/* Активная клетка */
+td:active {
+    background-color: #bae7ff;
+    transform: scale(0.98);
+}
+
+/* Для адаптива */
+@media (max-width: 500px) {
+    td {
+        width: 70px;
+        height: 70px;
+        font-size: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+}

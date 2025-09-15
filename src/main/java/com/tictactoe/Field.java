@@ -1,8 +1,6 @@
 package com.tictactoe;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Field {
@@ -10,26 +8,34 @@ public class Field {
 
     public Field() {
         field = new HashMap<>();
-        field.put(0, Sign.EMPTY);
-        field.put(1, Sign.EMPTY);
-        field.put(2, Sign.EMPTY);
-        field.put(3, Sign.EMPTY);
-        field.put(4, Sign.EMPTY);
-        field.put(5, Sign.EMPTY);
-        field.put(6, Sign.EMPTY);
-        field.put(7, Sign.EMPTY);
-        field.put(8, Sign.EMPTY);
+        for (int i = 0; i < 9; i++) {
+            field.put(i, Sign.EMPTY);
+        }
     }
 
     public Map<Integer, Sign> getField() {
         return field;
     }
 
-    public int getEmptyFieldIndex() {
-        return field.entrySet().stream()
+    public boolean isEmpty(int index) {
+        return field.get(index) == Sign.EMPTY;
+    }
+
+    public void setCell(int index, Sign sign) {
+        field.put(index, sign);
+    }
+
+    public boolean hasEmptyCell() {
+        return field.values().stream().anyMatch(s -> s == Sign.EMPTY);
+    }
+
+    public int getEmptyRandomCell() {
+        List<Integer> empty = field.entrySet().stream()
                 .filter(e -> e.getValue() == Sign.EMPTY)
                 .map(Map.Entry::getKey)
-                .findFirst().orElse(-1);
+                .collect(Collectors.toList());
+        if (empty.isEmpty()) return -1;
+        return empty.get(new Random().nextInt(empty.size()));
     }
 
     public List<Sign> getFieldData() {
@@ -51,10 +57,11 @@ public class Field {
                 List.of(2, 4, 6)
         );
 
-        for (List<Integer> winPossibility : winPossibilities) {
-            if (field.get(winPossibility.get(0)) == field.get(winPossibility.get(1))
-                && field.get(winPossibility.get(0)) == field.get(winPossibility.get(2))) {
-                return field.get(winPossibility.get(0));
+        for (List<Integer> win : winPossibilities) {
+            if (field.get(win.get(0)) == field.get(win.get(1))
+                    && field.get(win.get(0)) == field.get(win.get(2))
+                    && field.get(win.get(0)) != Sign.EMPTY) {
+                return field.get(win.get(0));
             }
         }
         return Sign.EMPTY;
