@@ -33,7 +33,7 @@ public class Field {
         List<Integer> empty = field.entrySet().stream()
                 .filter(e -> e.getValue() == Sign.EMPTY)
                 .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
+                .toList();
         if (empty.isEmpty()) return -1;
         return empty.get(new Random().nextInt(empty.size()));
     }

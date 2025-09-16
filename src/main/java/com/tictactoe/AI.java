@@ -4,10 +4,18 @@ import java.util.Random;
 
 public class AI {
     private final Random random = new Random();
+
     private int difficulty = 1; // 1 = easy, 2 = normal, 3 = hard
 
-    public void setDifficulty(int level) {
-        this.difficulty = level;
+
+    public int getDifficulty()
+    {
+        return difficulty;
+    }
+
+    public void setDifficulty(int difficulty)
+    {
+        this.difficulty = difficulty;
     }
 
     public int computeMove(Field field) {
